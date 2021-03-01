@@ -1,4 +1,4 @@
-package com.example.KBTG;
+package com.example.kbtg;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ public class DemoServiceTest {
     @DisplayName("ในการทำงานต้อง random ได้ค่า 5")
     public void random_5() {
         DemoService demoService = new DemoService();
-        demoService.setRandom(new Random5());
+        demoService.setRandom(new MockRandom(5));
         String actualResult =demoService.generateData("somkiat");
         assertEquals("somkiat5", actualResult);
     }
@@ -23,7 +23,7 @@ public class DemoServiceTest {
 
         assertThrows(RuntimeException.class, () -> {
             DemoService demoService = new DemoService();
-            demoService.setRandom(new Random6());
+            demoService.setRandom(new MockRandom(6));
             String actualResult = demoService.generateData("somkiat");
         });
 

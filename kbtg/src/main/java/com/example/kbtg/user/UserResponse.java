@@ -1,8 +1,4 @@
-
 package com.example.kbtg.user;
-
-import javax.annotation.Generated;
-import com.google.gson.annotations.Expose;
 
 public class UserResponse {
 
