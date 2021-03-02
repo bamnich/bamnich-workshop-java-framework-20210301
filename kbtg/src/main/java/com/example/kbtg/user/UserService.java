@@ -9,6 +9,6 @@ public class UserService {
         if(id <= 10){
             return new UserResponse(id, "bamnich", 25);
         }
-        throw new RuntimeException("User not found id: " + id);
+        throw new UserNotFoundException("User not found id: " + id);
     }
 }
