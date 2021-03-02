@@ -36,13 +36,9 @@ public class UserControllerTest {
     @Test
     public void user_not_found_with_user_id_15() {
         // TODO
-        try {
-            // Act
-            UserResponse response = restTemplate.getForObject("/users/15", UserResponse.class);
-            fail();
-        }catch (Exception e) {
-            assertEquals("User not found id: 15", e.getMessage());
-        }
+        ErrorResponse response = restTemplate.getForObject("/users/15", ErrorResponse.class);
+        assertEquals(1234, response.getCode());
+        assertEquals("User not found id: 15", response.getMessage());
     }
 
 }
