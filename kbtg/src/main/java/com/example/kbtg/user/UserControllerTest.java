@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class UserControllerTest {
@@ -35,6 +36,13 @@ public class UserControllerTest {
     @Test
     public void user_not_found_with_user_id_15() {
         // TODO
+        try {
+            // Act
+            UserResponse response = restTemplate.getForObject("/users/15", UserResponse.class);
+            fail();
+        }catch (Exception e) {
+            assertEquals("User not found id: 15", e.getMessage());
+        }
     }
 
 }
