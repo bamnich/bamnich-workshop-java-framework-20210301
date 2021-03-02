@@ -39,11 +39,11 @@ public class UserServiceTest {
         // Prepare
         when(userRepository.findById(15)).thenReturn(Optional.empty());
         //Act
-        UserService userService = new UserService(userRepository);
-        // Assert
-        assertThrows(UserNotFoundException.class, () -> {
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            UserService userService = new UserService(userRepository);
             userService.getInfo(15);
         });
+        assertEquals("Invalid number with 15", exception.getMessage());
     }
 
 }
