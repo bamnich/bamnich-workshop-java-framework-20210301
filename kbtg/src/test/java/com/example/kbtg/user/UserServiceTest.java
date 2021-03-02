@@ -43,7 +43,7 @@ public class UserServiceTest {
             UserService userService = new UserService(userRepository);
             userService.getInfo(15);
         });
-        assertEquals("Invalid number with 15", exception.getMessage());
+        assertEquals("User not found id: 15", exception.getMessage());
     }
 
 }
