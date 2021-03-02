@@ -3,7 +3,10 @@ package com.example.kbtg.post;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Optional;
 
 @Component
 public class PostGateway {
@@ -17,6 +20,17 @@ public class PostGateway {
         // Read from application.properties -> ${post.api.url}
         this.restTemplate = restTemplate;
         this.postApiUrl = postApiUrl;
+    }
+
+    public Optional<PostResponse> getPostById(int id) {
+        String url = String.format("%s/posts/%d", postApiUrl, id);
+
+        try {
+            return Optional.ofNullable(
+                    restTemplate.getForObject(url, PostResponse.class));
+        } catch (RestClientException e) {
+            return Optional.empty();
+        }
     }
 
 }
