@@ -18,18 +18,6 @@ public class DemoServiceTest {
     }
 
     @Test
-    @DisplayName("throw exception runtime is not in range")
-    public void random_throw_exception(){
-
-        assertThrows(RuntimeException.class, () -> {
-            DemoService demoService = new DemoService();
-            demoService.setRandom(new MockRandom(6));
-            String actualResult = demoService.generateData("somkiat");
-        });
-
-    }
-
-    @Test
     public void throw_exception_1() {
         DemoService demoService = new DemoService();
         demoService.setRandom(new MockRandom(1));
