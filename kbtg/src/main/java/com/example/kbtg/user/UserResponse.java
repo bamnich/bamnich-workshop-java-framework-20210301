@@ -39,4 +39,19 @@ public class UserResponse {
         this.name = name;
     }
 
+    @Override
+    public boolean equals(Object o) {
+
+        // If the object is compared with itself then return true
+        if (o.toString() == this.toString()) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.format(this.getId() + ":" + this.getName()+":"+this.getAge());
+    }
 }
