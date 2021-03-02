@@ -1,25 +1,23 @@
 package com.example.kbtg.user;
 
-public class UserResponse {
+import javax.persistence.*;
 
+@Entity
+@Table(name="User")
+public class MyUser {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private int age;
 
-    public UserResponse() {
+    public MyUser() {
     }
 
-    public UserResponse (int id, String name, int age) {
+    public MyUser(int id, String name, int age) {
         this.id = id;
         this.name = name;
-        this.age = age;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
         this.age = age;
     }
 
@@ -39,4 +37,11 @@ public class UserResponse {
         this.name = name;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 }

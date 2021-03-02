@@ -23,12 +23,7 @@ public class UserControllerTest {
         assertEquals("bamnich", response.getName());
         assertEquals(25, response.getAge());
 
-        UserResponse expected = new UserResponse(1, "bamnich", 25) {
-            @Override
-            public String toString () {
-                return String.format(response.getId() + ":" + response.getName() + ":" + response.getAge());
-            }
-        };
+        UserResponse expected = new UserResponse(1, "bamnich", 25);
         assertEquals(expected, response);
     }
 
