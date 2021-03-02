@@ -8,16 +8,21 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public UserResponse getInfo(int id){
         Optional<MyUser> user = userRepository.findById(id);
         if (user.isPresent()){
             MyUser myUser = user.get();
-            return new UserResponse(myUser.getId(), myUser.getName(), myUser.getAge());
-        }else{
-            throw new UserNotFoundException("User not found id: " + id);
+            return new UserResponse(id, myUser.getName(), myUser.getAge());
         }
+
+        throw new UserNotFoundException("User not found id: " + id);
+
     }
 }

@@ -14,6 +14,7 @@ public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Test
     public void found_get_user_by_id(){
         // Prepare
         MyUser bamnich = new MyUser();

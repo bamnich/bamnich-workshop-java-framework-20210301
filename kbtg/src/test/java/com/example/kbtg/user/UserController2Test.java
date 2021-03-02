@@ -1,36 +1,35 @@
 package com.example.kbtg.user;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.Optional;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class UserControllerTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+
+@SpringBootTest(webEnvironment = RANDOM_PORT)
+public class UserController2Test {
 
     @Autowired
     private TestRestTemplate restTemplate;
 
-    @Autowired
+    @MockBean
     private UserRepository userRepository;
-
-    @AfterEach
-    public void clearData(){
-        userRepository.deleteAll();
-    }
 
     @Test
     public void success_get_user_id_1() {
         // Prepare
         MyUser bamnich = new MyUser();
+        bamnich.setId(1);
         bamnich.setName("bamnich");
         bamnich.setAge(25);
-        userRepository.save(bamnich);
+        when(userRepository.findById(1)).thenReturn(Optional.of(bamnich));
 
         UserResponse response = restTemplate.getForObject("/users/1", UserResponse.class);
 
@@ -40,14 +39,6 @@ public class UserControllerTest {
 
         UserResponse expected = new UserResponse(1, "bamnich", 25);
         assertEquals(expected, response);
-    }
-
-    @Test
-    public void user_not_found_with_user_id_15() {
-        // TODO
-        ErrorResponse response = restTemplate.getForObject("/users/15", ErrorResponse.class);
-        assertEquals(1234, response.getCode());
-        assertEquals("User not found id: 15", response.getMessage());
     }
 
 }
